@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta name="viewport" content="initial-scale=1, width=device-width">
+    <meta charset="utf-8">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.bundle.js"></script>
+    <title>Chart.js-line</title>
+  </head>
+  <body>
+    <canvas id="lineChart"></canvas>
+    <script>
+      var ctx = document.getElementById("lineChart");
+      var data = {
+        labels: ['Jan.', 'Feb.', 'Mar.', 'Apr.', 'May', 'June', 'July', 'Aug.', 'Sep.', 'Oct.', 'Nov.', 'Dec.'],
+        datasets: [
+          {
+            label: 'BlackCoffee',
+            data: [300, 280, 340, 365, 310, 290, 315, 310, 295, 340, 350, 335],
+            backgroundColor: 'rgba(0, 0, 0, 0)',
+            borderColor: 'rgba(241, 181, 237, 1)',
+            borderWidth: 2
+          },
+          {
+            label: 'Latte',
+            data: [250, 235, 260, 290, 320, 315, 320, 340, 315, 310, 290, 300],
+            backgroundColor: 'rgba(0, 0, 0, 0)',
+            borderColor: 'rgba(154, 155, 238, 1)',
+            borderWidth: 2
+          },
+          {
+            label: 'Mocha',
+            data: [180, 230, 245, 275, 190, 210, 220, 225, 185, 175, 240, 230],
+            backgroundColor: 'rgba(0, 0, 0, 0)',
+            borderColor: 'rgba(154, 238, 165, 1)',
+            borderWidth: 2
+          }
+        ]
+      };
+      var myChart = new Chart(ctx, {
+        type: 'line',
+        data: data,
+        options: {
+          responsive: true,
+          title: {
+            display: true,
+            text: 'Line Chart Sample'
+          },
+          legend: {
+            position: 'top'
+          },
+          scales: {
+            yAxes: [{
+              ticks: {
+                suggestedMin: 0,
+                suggestedMax: 400,
+                stepSize: 20
+              }
+            }]
+          }
+        }
+      });
+    </script>
+  </body>
+</html>

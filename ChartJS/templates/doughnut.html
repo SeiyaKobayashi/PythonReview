@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta name="viewport" content="initial-scale=1, width=device-width">
+    <meta charset="utf-8">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.bundle.js"></script>
+    <title>Chart.js-doughnut</title>
+  </head>
+  <body>
+    <canvas id="doughnutChart"></canvas>
+    <script>
+      var ctx = document.getElementById("doughnutChart");
+      var data = {
+        labels: ['BlackCoffee', 'Latte', 'Mocha', 'ChaiLatte', 'HotChocolate'],
+        datasets: [
+          {
+            data: [350, 280, 220, 240, 180],
+            backgroundColor: ['rgba(241, 181, 237, 0.6)',
+                              'rgba(154, 155, 238, 0.6)',
+                              'rgba(154, 238, 165, 0.6)',
+                              'rgba(248, 244, 63, 0.6)',
+                              'rgba(178, 178, 178, 0.6)'],
+            borderColor: 'rgba(0, 0, 0, 0)',
+            borderWidth: 2
+          },
+        ]
+      };
+      var myChart = new Chart(ctx, {
+        type: 'doughnut',
+        data: data,
+        options: {
+          responsive: true,
+          title: {
+            display: true,
+            text: 'Doughnut Chart Sample'
+          },
+          legend: {
+            position: 'top'
+          }
+        }
+      });
+    </script>
+  </body>
+</html>
