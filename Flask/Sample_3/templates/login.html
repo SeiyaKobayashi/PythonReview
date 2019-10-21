@@ -9,13 +9,21 @@
             <div class="form-group row justify-content-center">
                 <label for="inputEmail" class="col-sm-2 col-form-label">Email</label>
                 <div class="col-sm-6">
-                  <input name="email" type="email" placeholder="Email" class="form-control" id="inputEmail" required>
+                    {% if session['email'] %}
+                        <input name="email" type="email" placeholder="Email" value="{{session['email']}}" class="form-control" id="inputEmail" required>
+                    {% else %}
+                        <input name="email" type="email" placeholder="Email" class="form-control" id="inputEmail" required>
+                    {% endif %}
                 </div>
             </div>
             <div class="form-group row justify-content-center">
                 <label for="inputPassword" class="col-sm-2 col-form-label">Password</label>
                 <div class="col-sm-6">
-                  <input name="password" type="password" placeholder="Password" class="form-control" id="inputPassword" required>
+                    {% if session['password'] %}
+                        <input name="password" type="password" placeholder="password" value="{{session['password']}}" class="form-control" id="inputPassword" required>
+                    {% else %}
+                        <input name="password" type="password" placeholder="password" class="form-control" id="inputPassword" required>
+                    {% endif %}
                 </div>
             </div>
             <div class="row justify-content-center">

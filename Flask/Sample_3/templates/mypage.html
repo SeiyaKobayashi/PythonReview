@@ -7,7 +7,13 @@
             <p>Email: {{session['email']}}</p>
             <p>Gender: {{session['gender']}}</p>
         </div>
-        <div class="text-center">
+        <div class="row text-center">
+            <a href="{{url_for('update', userid=session['userid'])}}">Update My Profile</a>
+        </div>
+        <div class="row text-center">
+            <a href="{{url_for('index_users')}}">See All Users</a>
+        </div>
+        <div class="row text-center">
             <a href="{{url_for('logout')}}">Logout</a>
         </div>
     </div>

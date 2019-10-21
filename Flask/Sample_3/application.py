@@ -16,19 +16,19 @@ def register():
         if request.method == 'GET':
             return render_template("register.html")
         elif request.method == 'POST':
+            session['name']     = request.form.get("name")
+            session['email']    = request.form.get("email")
+            session['password'] = request.form.get("password")
+            session['gender']   = request.form.get("gender")
+
             if not request.form.get("name") or not request.form.get("email") \
                or not request.form.get("password") or not request.form.get("gender"):
                 return redirect("/register")
             elif len(request.form.get("password")) <= 3:
                 return redirect("/register")
             else:
-                session['name']     = request.form.get("name")
-                session['email']    = request.form.get("email")
-                session['password'] = request.form.get("password")
-                session['gender']   = request.form.get("gender")
-
-                insert_db("INSERT INTO user (name, email, password, gender) \
-                           VALUES(?, ?, ?, ?)", (session['name'], session['email'], session['password'], session['gender']))
+                insert_db("INSERT INTO user (name, email, password, gender) VALUES(?, ?, ?, ?)", \
+                          (session['name'], session['email'], session['password'], session['gender']))
                 user = query_db("SELECT * FROM user WHERE email = ?", (session['email'],), True)
 
                 session['userid'] = user['id']
@@ -75,6 +75,31 @@ def mypage(userid):
         return redirect(url_for('mypage', userid=session['userid']))
     else:
         return render_template("mypage.html", session=session)
+
+@app.route("/<userid>/edit", methods=["GET", "POST"])
+def update(userid):
+    # If not logged in
+    if 'userid' not in session:
+        return redirect("/login")
+    # Check if it's a valid user
+    elif int(userid) != session['userid']:
+        return redirect(url_for('mypage', userid=session['userid']))
+    else:
+        if request.method == 'GET':
+            return render_template("edit_profile.html", session=session)
+        elif request.method == 'POST':
+            session['name']     = request.form.get("name")
+            session['email']    = request.form.get("email")
+            session['password'] = request.form.get("password")
+            session['gender']   = request.form.get("gender")
+
+            insert_db("UPDATE user \
+                       SET name=?, email=?, password=?, gender=? \
+                       WHERE id=?", (session['name'], session['email'], session['password'], session['gender'], session['userid']))
+
+            user = query_db("SELECT * FROM user WHERE id = ?", (session['userid'],), True)
+
+            return redirect(url_for('mypage', userid=session['userid']))
 
 @app.route("/users")
 def index_users():

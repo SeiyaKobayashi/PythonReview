@@ -3,8 +3,12 @@
 {% block body %}
     <div class="container">
         <div class="text-center">
-            <a href="{{url_for('register')}}">New User? Register from Here!</a>
-            <a href="{{url_for('login')}}">Already have an account? Login from Here!</a>
+            <div class="row text-center">
+                <a href="{{url_for('register')}}">New User? Register from Here!</a>
+            </div>
+            <div class="row text-center">
+                <a href="{{url_for('login')}}">Already have an account? Login from Here!</a>
+            </div>
         </div>
     </div>
 {% endblock %}
