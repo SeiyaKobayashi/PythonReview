@@ -2,13 +2,13 @@
 
 {% block body %}
     <div class="container">
+        {% for user in users %}
+            <div class="row text-center">
+                  <p>ID: {{user['id']}}, Name: {{user['name']}}, Email: {{user['email']}}, Gender: {{user['gender']}}</p>
+            </div>
+        {% endfor %}
         <div class="row text-center">
-            {% for user in users %}
-              <p>ID: {{user['id']}}, Name: {{user['name']}}, Email: {{user['email']}}, Gender: {{user['gender']}}</p>
-            {% endfor %}
-        </div>
-        <div class="row text-center">
-            <a href="{{url_for('mypage', userid=session['userid'])}}">Back to MyPage</a>
+            <a href="{{url_for('profile', userid=session['userid'])}}">Back to MyPage</a>
         </div>
     </div>
 {% endblock %}

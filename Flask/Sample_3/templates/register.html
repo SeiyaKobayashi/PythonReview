@@ -1,11 +1,19 @@
 {% extends "layout.html" %}
 
 {% block body %}
+    {% if errMsg %}
+        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+            {{errMsg}}
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+    {% endif %}
     <div class="container">
         <div class="row justify-content-center">
             <h1>Register</h1>
         </div>
-        <form action="/register" method="post">
+        <form action="{{url_for('register', errMsg=None)}}" method="post">
             <div class="form-group row justify-content-center">
                 <label for="inputName" class="col-sm-2 col-form-label">Your Name</label>
                 <div class="col-sm-6">
