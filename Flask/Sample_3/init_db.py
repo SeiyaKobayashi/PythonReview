@@ -1,8 +1,8 @@
 from flask import Flask, g
+from config import DATABASE
 import sqlite3
 
 app = Flask(__name__)
-DATABASE = 'models/user.db'
 
 def init_db():
     with app.app_context():
@@ -19,7 +19,7 @@ def get_db():
         db.row_factory = sqlite3.Row     # results of queries are of nametuple type
     return db
 
-def insert_db(query, args=()):
+def modify_db(query, args=()):
     db = get_db()
     cur = db.execute(query, args)
     db.commit()
@@ -37,6 +37,3 @@ def close_connection(exception):
     db = getattr(g, '_database', None)
     if db != None:
         db.close()
-
-if __name__ == '__main__':
-    init_db()

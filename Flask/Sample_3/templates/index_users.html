@@ -1,13 +1,36 @@
 {% extends "layout.html" %}
 
 {% block body %}
-    <div class="container">
-        {% for user in users %}
-            <div class="row text-center">
-                  <p>ID: {{user['id']}}, Name: {{user['name']}}, Email: {{user['email']}}, Gender: {{user['gender']}}</p>
-            </div>
-        {% endfor %}
-        <div class="row text-center">
+    <div class="row justify-content-center mt-5">
+        <div class="col-8">
+            <table class="table table-striped">
+              <thead>
+                <tr>
+                  <th scope="col">ID</th>
+                  <th scope="col">Name</th>
+                  <th scope="col">Email</th>
+                  <th scope="col">Gender</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for user in users %}
+                  <tr>
+                    <th scope="row">{{user['id']}}</th>
+                    {% if session['userid'] == user['id'] %}
+                        <td><a href="{{url_for('profile', userid=user['id'])}}">{{user['name']}}</a> (You)</td>
+                    {% else %}
+                        <td><a href="{{url_for('profile', userid=user['id'])}}">{{user['name']}}</a></td>
+                    {% endif %}
+                    <td>{{user['email']}}</td>
+                    <td>{{user['gender']}}</td>
+                  </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="row text-center mt-4">
+        <div class="col">
             <a href="{{url_for('profile', userid=session['userid'])}}">Back to MyPage</a>
         </div>
     </div>

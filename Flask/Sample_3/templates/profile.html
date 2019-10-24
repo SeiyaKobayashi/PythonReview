@@ -1,37 +1,77 @@
 {% extends "layout.html" %}
 
 {% block body %}
-    {% if errMsg %}
-        <div class="alert alert-warning alert-dismissible fade show" role="alert">
-            {{errMsg}}
-            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-            </button>
-        </div>
-    {% endif %}
     {% if user %}
-        <div class="container">
-            <div class="text-center">
-                <p>Name: {{user['name']}}</p>
-                <p>Email: {{user['email']}}</p>
-                <p>Gender: {{user['gender']}}</p>
+        <div class="text-center">
+            <div class="row mt-5">
+                <div class="col-12">
+                    <div class="row justify-content-center align-items-center">
+                        <div class="col-2 text-right">
+                            <h5>ID:</h5>
+                        </div>
+                        <div class="col-3">
+                            <h6>{{user['id']}}</h6>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12">
+                    <div class="row justify-content-center align-items-center">
+                        <div class="col-2 text-right">
+                            <h5>Username:</h5>
+                        </div>
+                        <div class="col-3">
+                            <h6>{{user['name']}}</h6>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12">
+                    <div class="row justify-content-center align-items-center">
+                        <div class="col-2 text-right">
+                            <h5>Email:</h5>
+                        </div>
+                        <div class="col-3">
+                            <h6>{{user['email']}}</h6>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12">
+                    <div class="row justify-content-center align-items-center">
+                        <div class="col-2 text-right">
+                            <h5>Gender:</h5>
+                        </div>
+                        <div class="col-3">
+                            <h6>{{user['gender']}}</h6>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     {% else %}
-        <div class="container">
-            <div class="text-center">
-                <p>Hello, {{session['name']}}!!</p>
-                <p>Email: {{session['email']}}</p>
-                <p>Gender: {{session['gender']}}</p>
-            </div>
-            <div class="row text-center">
-                <a href="{{url_for('update', userid=session['userid'])}}">Update My Profile</a>
-            </div>
-            <div class="row text-center">
-                <a href="{{url_for('index_users')}}">See All Users</a>
-            </div>
-            <div class="row text-center">
-                <a href="{{url_for('logout')}}">Logout</a>
+        <div class="text-center">
+            <div class="row mt-5">
+                <div class="col-12">
+                    <h3>Hello, {{session['name']}}!!</h3>
+                </div>
+                <div class="col-12 pt-3">
+                    <div class="row justify-content-center align-items-center">
+                        <div class="col-2 text-right">
+                            <h5>Your Email:</h5>
+                        </div>
+                        <div class="col-3">
+                            <h6>{{session['email']}}</h6>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 pt-3">
+                    <div class="row justify-content-center align-items-center">
+                        <div class="col-2 text-right">
+                            <h5>Your Gender:</h5>
+                        </div>
+                        <div class="col-3">
+                            <h6>{{session['gender']}}</h6>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     {% endif %}
